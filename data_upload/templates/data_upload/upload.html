@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div>
+        <h1>Upload Data</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h4>Select & Upload File</h4>
+            <input type="file" name="files" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    {% if data_to_display %}
+    <h1>Data display</h1>
+    <div>
+        <h2>Uploaded Data</h2>
+        {{ data_to_display | safe }}
+    </div>
+    {% endif %}
+{% endblock content %}
