@@ -13,6 +13,16 @@ def upload(request):
         path = os.path.join(settings.MEDIA_ROOT, 'uploads', file.name)
         print(f"this is the PATH {path}")
         df = pd.read_csv(path)
-        data_to_display = df.to_html()
+        data_to_display = df.head().to_html()
+
+        for index, row in df.iterrows():
+            _, created = Tickets.objects.update_or_create(
+                Resolved_By = row['Resolved By'],
+                Status = row['Status'],
+                Parent_Record_Type = row['Parent Record Type'],
+                Resolved_DateTime = row['Resolved DateTime'],
+                Created_Date_Time = row['Created Date Time'],
+            )
+
     context = {'data_to_display': data_to_display}
     return render(request, 'data_upload/upload.html', context)
