@@ -4,7 +4,7 @@ from django.db import models
 class Tickets(models.Model):
     Resolved_By = models.CharField(max_length=100)
     Status = models.CharField(max_length=50)
-    Parent_Record_Type = models.CharField(50)
+    Parent_Record_Type = models.CharField(max_length=50)
     Resolved_DateTime = models.DateTimeField()
     Created_Date_Time = models.DateTimeField()
 
