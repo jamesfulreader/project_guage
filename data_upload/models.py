@@ -10,4 +10,4 @@ class Tickets(models.Model):
 
 
 class File(models.Model):
-    file = models.FileField(upload_to='csv')
+    file = models.FileField(upload_to='uploads/')
