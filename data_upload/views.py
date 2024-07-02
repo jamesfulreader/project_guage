@@ -3,7 +3,7 @@ from .models import Tickets, File
 import pandas as pd
 
 # Create your views here.
-def upload_csv(request):
+def upload(request):
     data_to_display = None
     if request.method == 'POST':
         file = request.FILES['files']
@@ -12,4 +12,4 @@ def upload_csv(request):
         df = pd.read_csv(path)
         data_to_display = df.to_html()
     context = {'data_to_display': data_to_display}
-    return render(request, 'data_upload/csv_upload.html', context)
+    return render(request, 'data_upload/upload.html', context)
