@@ -11,12 +11,15 @@ from .utils import count_completed_tickets
 def home(request):
     data = Tickets.objects.all()
     completed_tickets = count_completed_tickets(data)
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(13, 6.5))
     plt.barh(completed_tickets.keys(), completed_tickets.values())
     plt.ylabel("Names")
     plt.xlabel("Completed Tickets")
     plt.title("Completed Tickets by Name")
     plt.grid(True)
+
+    for i, value in enumerate(completed_tickets.values()):
+        plt.text(value, i, str(value), ha='left', va='center', fontsize=10)
     
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
