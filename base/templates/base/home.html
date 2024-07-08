@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Home Template</h1>
-    <div>
-        <img src="data:image/png;base64,{{ data }}" height="600">
-    </div>
+
+    <div>{{plot|safe}}</div>
+
 {% endblock content %}

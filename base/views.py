@@ -1,9 +1,8 @@
-import urllib.parse
 from django.shortcuts import render
 from data_upload.models import Tickets
-import matplotlib.pyplot as plt
-import io
-import urllib, base64
+
+import plotly.graph_objects as go
+from plotly.offline import plot
 
 from .utils import count_completed_tickets
 
@@ -11,23 +10,16 @@ from .utils import count_completed_tickets
 def home(request):
     data = Tickets.objects.all()
     completed_tickets = count_completed_tickets(data)
-    plt.figure(figsize=(13, 6.5))
-    plt.barh(completed_tickets.keys(), completed_tickets.values())
-    plt.ylabel("Names")
-    plt.xlabel("Completed Tickets")
-    plt.title("Completed Tickets by Name")
-    plt.grid(True)
 
-    for i, value in enumerate(completed_tickets.values()):
-        plt.text(value, i, str(value), ha='left', va='center', fontsize=10)
-    
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    plt.close()
-    buffer.seek(0)
-    string = base64.b64encode(buffer.read())
-    uri = urllib.parse.quote(string)
+    x_data = completed_tickets.values()
+    y_data = completed_tickets.keys()
+    x_data = list(x_data)
+    y_data = list(y_data)
 
-    return render(request, 'base/home.html', {
-        'data': uri
-    })
+    fig = go.Figure(data=go.Bar(x=x_data, y=y_data, orientation='h'))
+
+    fig.update_layout(title='Completed Tickets by Name')
+    fig.to_plotly_json()
+    plt_div = plot(fig, output_type='div')
+    context = {'plot': plt_div}
+    return render(request, 'base/home.html', context)
