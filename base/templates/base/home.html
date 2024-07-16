@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Tickets Data</h1>
+    <a href="{% url 'upload' %}"><button>upload CSV</button></a>
     <div>{{plot|safe}}</div>
     <br>
     <div>{{plot2|safe}}</div>
+    <br>
 {% endblock content %}

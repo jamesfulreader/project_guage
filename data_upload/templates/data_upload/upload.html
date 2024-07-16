@@ -2,7 +2,36 @@
 
 {% block content %}
     <div>
-        <h1>Upload Data</h1>
+        <h1>Upload Data</h1><a href="{% url "home" %}"><button>View Data</button></a>
+        <table>
+            <caption>CSV Upload Format</caption>
+            <thead>
+                <tr>
+                    <th>Resolved By</th>
+                    <th>Status</th>
+                    <th>Parent Record Type</th>
+                    <th>Resolved Date</th>
+                    <th>Created Date</th>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td>Big Boss</td>
+                        <td>Completed</td>
+                        <td>Service Request</td>
+                        <td>10/3/2023</td>
+                        <td>7/28/2021</td>
+                    </tr>
+                    <tr>
+                        <td>Big Boss</td>
+                        <td>Withdrawn</td>
+                        <td>Incident</td>
+                        <td>4/11/2023</td>
+                        <td>4/19/2023</td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+        
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <h4>Select & Upload File</h4>
